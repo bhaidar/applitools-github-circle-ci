@@ -1,0 +1,16 @@
+{
+  "name": "cross-browser-testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cy:run": "cypress run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@applitools/eyes-cypress": "^3.8.18",
+    "cypress": "^3.6.0"
+  }
+}

@@ -1,0 +1,25 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/applitools-github-circleci
+    docker:
+      - image: cypress/base:10
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v2-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - v2-deps-{{ .Branch }}-
+            - v2-deps-
+      - run: npm ci
+      - save_cache:
+          key: v2-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+      - run: # run tests
+          name: Run Applitools/Cypress visual UI tests
+          command: |
+            export APPLITOOLS_BATCH_ID=${CIRCLE_SHA1}
+            echo $APPLITOOLS_BATCH_ID
+            npm run cy:run -- --spec "cypress/integration/salesforce-contactus.spec.js"
