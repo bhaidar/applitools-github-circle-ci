@@ -6,7 +6,6 @@ context('Applitools', () => {
         // Open the Applitools Test
         cy.eyesOpen({
             appName: 'Applitools CircleCI',
-            batchName: 'Circle CI batch',
             browser: [
                 { width: 800, height: 600, name: 'firefox' },
                 { width: 1024, height: 768, name: 'chrome' },
@@ -27,9 +26,6 @@ context('Applitools', () => {
         // Wait on the page to load
         cy.location('pathname', { timeout: 10000 })
             .should('include', '/contactme');
-
-        cy.get('button[id="onetrust-accept-btn-handler"]', { timeout: 10000 })
-            .click();
 
         // Take a snapshot of the contact form
         cy.eyesCheckWindow('Contact Form');
